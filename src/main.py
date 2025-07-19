@@ -1,5 +1,11 @@
 import streamlit as st
 
+st.set_page_config(
+    page_title="WFI Data Processor",
+    page_icon=":bar_chart:",
+    layout="wide"
+)
+
 st.title("Weighted Fitting Index (WFI) Data Processing")
 
 with st.expander("Terms and Conditions"):
@@ -12,4 +18,7 @@ with st.expander("Terms and Conditions"):
     
 st.markdown("""
 ## Please select a page for each function from the sidebar.
+  
+  
+Copyright © 2025 Yuya Orito. All rights reserved.
 """)
