@@ -10,7 +10,7 @@ Draw charts with Weighted Error Ranges (WER) from an Excel file containing exper
 The Excel file shuld have the following structure:
 - The first row should contain the column headers.
     - The text is used as the series name in the legend.
-    - TeX formatting is supported, e.g., `\Delta` for delta.
+    - TeX formatting is supported, e.g., `\\Delta` for delta.
 - The columns with "Time", "Sim" or "Exp" in the second row are processed.
     - "Time" for time series, currently only one time series is supported.
     - "Sim" for simulation data. WERs are calculated from this data. Plotted as a line with shaded error range.
