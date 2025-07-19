@@ -12,13 +12,13 @@ The Excel file shuld have the following structure:
     - The text is used as the series name in the legend.
     - TeX formatting is supported, e.g., `\\Delta` for delta.
 - The columns with "Time", "Sim" or "Exp" in the second row are processed.
-    - "Time" for time series, currently only one time series is supported.
+    - "Time" for time series, in min. Currently only one time series is supported.
     - "Sim" for simulation data. WERs are calculated from this data. Plotted as a line with shaded error range.
     - "Exp" for experimental data. Plotted without line.
     - The colours are assigned based on the order of the columns (left to right). 
     Make sure the columns are sorted in same order for both "Sim" and "Exp". 
 - The third row is reserved for output data, which will be used in WFI calculator.
-- The fourth row and below are for the actual data values.
+- The fourth row and below are for the actual data values in %.
 
 1. Upload your Excel file using the sidebar.
 2. Specify the sheet index number to read data from.
