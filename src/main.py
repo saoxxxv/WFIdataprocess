@@ -20,5 +20,5 @@ st.markdown("""
 ## Please select a page for each function from the sidebar.
   
   
-Copyright © 2025 Yuya Orito. All rights reserved.
+Copyright © 2025 Yuya Orito; All rights reserved.
 """)
