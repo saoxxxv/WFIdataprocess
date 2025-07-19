@@ -36,9 +36,14 @@ if uploaded_file is not None:
     exp_startcolour = st.sidebar.selectbox("Experiment Start Color Preset", options=list(colour_preset_indices.keys()), index=0, format_func=lambda x: colour_preset_indices[x])
 
     if st.button("Process"):
-        df = pd.read_excel(uploaded_file, sheet_name=sheet_name)
+        #df = pd.read_excel(uploaded_file, sheet_name=sheet_name)
         df_trimmed = add_WERs(uploaded_file, sheet_name, WER_a, WER_b, WER_k)
         
+        # Error handling.
+        if df_trimmed is None or df_trimmed.empty:
+            st.error("The processed data is empty or invalid. Please check the input file.")
+            st.stop()
+    
         fig, ax = draw_WERcharts(
             df_trimmed, 
             var_marker_size, 
