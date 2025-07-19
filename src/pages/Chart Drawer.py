@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__),".."))
+sys.path.append(os.path.join(os.path.dirname(__file__),"../.."))
 
 from libs.libWFI import add_WERs, draw_WERcharts
 
