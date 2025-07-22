@@ -36,7 +36,7 @@ if uploaded_file is not None:
     exp_startcolour = st.sidebar.selectbox("Experiment Start Color Preset", options=list(colour_preset_indices.keys()), index=0, format_func=lambda x: colour_preset_indices[x])
 
     if st.button("Process"):
-        #df = pd.read_excel(uploaded_file, sheet_name=sheet_name)
+    
         df_trimmed = add_WERs(uploaded_file, sheet_name, WER_a, WER_b, WER_k)
         
         # Error handling.

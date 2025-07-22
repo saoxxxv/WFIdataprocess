@@ -25,12 +25,12 @@ def add_WERs(strExcelFilename, sheetno, WER_a, WER_b, WER_k):
             header=0
         )
     except ValueError as e:
-        print(f"Excelシートの読み込みでエラーが発生しました: {e}")
-        return None  # またはraiseや他のエラーハンドリング
+        print(f"Excel sheet open error: {e}")
+        return None 
 
     # 1行目（iloc[0]）の値がNaNでない列を選択：ヘッダ行は数えないというちょっと許しがたい仕様
     # 元のオブジェクトからのビューかオブジェクトのコピーかわからないから明示しないとだめらしい。ひどくない？
-    # つまりデフォルトの挙動はなくて文脈でポインタか実体かが決まってるってこと？ChatGPTによるとそうらしい。癖つよ。numpyの方が素直だって。
+    # つまりデフォルトの挙動はなくて文脈でポインタか実体かが決まってるってこと？そうらしい。癖つよ。
     dfTrimmed = dfExcel.loc[:, dfExcel.iloc[0].notna()].copy()
 
     target_columns = dfTrimmed.columns[dfTrimmed.iloc[0] == "Sim"]
