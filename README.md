@@ -31,7 +31,10 @@ See Usage page shown in sidebar for input data format etc.
 ## License
 This project is dual-licensed:  
 - **AGPLv3** for academic and non-commercial use.  
-- **Commercial licenses** are available upon request.  
+- **Commercial licenses** are available upon request.
+
+See the [LICENSE](./LICENSE) file for open source terms.  
+For commercial licensing, see [COMMERCIAL_LICENSE.md](./COMMERCIAL_LICENSE.md).  
 
 ## Citation
 Cite this work as:  
