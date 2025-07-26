@@ -4,9 +4,9 @@ A data processor for chemical reaction timecourses that provides weighted error 
 ## Purpose
 This tool has been developed as a part of research on mechanism-oriented kinetic analysis of chemical reactions to help organic chemists 
 visualize the relationship between simulation and experimental results, thereby enabling investigation of the extrapolability of the kinetic model.  
-It is specially designed to support synthetic organic chemists who may not be quite familiar with analyzing reaction mechanisms through physical calculations 
-rather than utilizing curly arrows and dots. By encapsulating mathematical flavour and automatic processing of user-friendly Excel data, the tool allows users
-with deep chemical knowledge to focus on chemistry rather than calculation details.
+It is specially designed to support synthetic organic chemists who may not be quite familiar with analyzing reaction mechanisms through physical calculations, 
+rather than utilizing curly arrows, lines, and dots. By encapsulating mathematical flavour and automatic processing of user-friendly Excel data, the tool allows users
+with deep chemical knowledge to focus on chemistry putting aside calculation details.
 
 ## Output samples
 ![Screenshot](./assets/sample_chart.png)
