@@ -26,7 +26,7 @@ def add_WERs(strExcelFilename, sheetno, WER_a, WER_b, WER_k):
         )
     except ValueError as e:
         print(f"Excel sheet open error: {e}")
-        return None 
+        return None
 
     # 1行目（iloc[0]）の値がNaNでない列を選択：ヘッダ行は数えないというちょっと許しがたい仕様
     # 元のオブジェクトからのビューかオブジェクトのコピーかわからないから明示しないとだめらしい。ひどくない？
@@ -52,6 +52,7 @@ def add_WERs(strExcelFilename, sheetno, WER_a, WER_b, WER_k):
         )
 
     return dfTrimmed
+
 
 def draw_WERcharts(
     dfTrimmed, 
@@ -194,5 +195,47 @@ def draw_WERcharts(
     return fig, ax
 
 
+def calc_WFI(dfTrimmed, WER_a, WER_b, WER_k):
+    # Returns a Dataframe object with WFI values.
+    # Input a Dataframe processed by add_WERs function.
+    # add_WERsにまとめてもいいのだが。
+
+    if dfTrimmed is None or dfTrimmed.empty:
+        print("Invalid DataFrame provided.")
+        return None
+    
+    #   Ys, Yeを含む列の取得
+
+    simulation_columns = dfTrimmed.columns[dfTrimmed.iloc[0] == "Sim"]
+    experiment_columns = dfTrimmed.columns[dfTrimmed.iloc[0] == "Exp"]
+
+    #   Exp, Sim各列についてループ
+
+    for column_Ye, column_Ys in zip(experiment_columns, simulation_columns):
+
+        #   3行目にラベルをつける
+        dfTrimmed.at[1, column_Ys] = "Ys, %"
+        dfTrimmed.at[1, column_Ye] = "Ye, %"
+        dfTrimmed.at[1, f"{column_Ys}_ER"] = "Erel, %"
+        dfTrimmed.at[1, f"{column_Ye}_Eabs"] = "Eabs, %"
+        dfTrimmed.at[1, f"{column_Ye}_WFIn"] = "WFI(n)"
+
+        #   各行の値についてループ
+        for i in range(2, len(dfTrimmed)):
+
+            #   値がNaNでない場合、Exp列の値をSim列の値と比較して、WFIを計算する
+
+            if not na.isnan(dfTrimmed.at[i, column_Ye]):
+                #   Eabs, WFI(n)の計算
+
+                dfTrimmed.at[i, f"{column_Ye}_Eabs"] = abs(
+                    dfTrimmed.at[i, column_Ye] - dfTrimmed.at[i, column_Ys]
+                ) / dfTrimmed.at[i, column_Ys] * 100
+
+                dfTrimmed.at[i, f"{column_Ye}_WFIn"] = (
+                    dfTrimmed.at[i, f"{column_Ye}_Eabs"] / dfTrimmed.at[i, f"{column_Ys}_ER"] 
+                ) 
+
+    return dfTrimmed
 
 
