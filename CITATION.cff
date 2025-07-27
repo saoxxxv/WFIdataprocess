@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-message: "Cite this:"
+message: "Cite this as follows:"
 title: "WFI Data Processor"
-version: 1.0.0
-doi: 10.5281/zenodo.1234567
+version: 1.0.1
+doi: 10.5281/zenodo.16490790
 date-released: 2025-07-25
 authors:
   - family-names: Orito

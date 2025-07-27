@@ -44,7 +44,8 @@ For commercial licensing, see [COMMERCIAL_LICENSE.md](./COMMERCIAL_LICENSE.md).
 ## Citation
 Cite this work as:  
 Orito, Y.  _ACS Omega_ **2025**, _10_, 9266–9274. https://doi.org/10.1021/acsomega.4c09609.  
-[![DOI](https://zenodo.org/badge/1022603166.svg)](https://zenodo.org/badge/latestdoi/1022603166)
+For simple data processing tools: Orito, Y. &nbsp;WFI Data Processor. _Zenodo_ **2025**. https://doi.org/10.5281/zenodo.16490790.  
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16490790.svg)](https://doi.org/10.5281/zenodo.16490790)
 
 ## Contact
 For bug reports, feature requests, or commercial inquiries, please contact:  

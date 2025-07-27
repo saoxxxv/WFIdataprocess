@@ -19,6 +19,9 @@ with st.expander("Terms and Conditions"):
     * **For non-commercial use:** free to use with appropriate citation.              
     Cite this:  
     Orito, Y. &ensp;_ACS Omega_ **2025**, _10_ (9), 9266–9274. https://doi.org/10.1021/acsomega.4c09609.  
+    For simple data processing tools: Orito, Y. &nbsp;WFI Data Processor. _Zenodo_ **2025**. https://doi.org/10.5281/zenodo.16490790.  
+    [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16490790.svg)](https://doi.org/10.5281/zenodo.16490790)
+
     * **For commercial use:** please contact the author.
                     
     See also the [Github repository](https://github.com/saoxxxv/WFIdataprocess).

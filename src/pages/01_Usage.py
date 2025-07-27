@@ -24,7 +24,7 @@ with open("assets/sample_data.xlsx", "rb") as file:
     sample_data = file.read()
     b64 = base64.b64encode(sample_data).decode()
     href = f'<a href="data:file/xlsx;base64,{b64}" download="sample_data.xlsx">Download Sample Data</a>: \
-            Extracted from the SI of: Orito, Y. _Org. Process Res. Dev._ **2025**, _29_ (7), 1757–1765. https://doi.org/10.1021/acs.oprd.5c00107.'
+            A part of the SI of: Orito, Y. _Org. Process Res. Dev._ **2025**, _29_ (7), 1757–1765. https://doi.org/10.1021/acs.oprd.5c00107.'
     st.markdown(href, unsafe_allow_html=True)
 
 st.markdown("""
