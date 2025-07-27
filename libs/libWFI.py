@@ -34,53 +34,27 @@ def add_WERs(strExcelFilename, sheetno, WER_a, WER_b, WER_k):
 
     target_columns = dfTrimmed.columns[dfTrimmed.iloc[0] == "Sim"]
 
-    for column in target_columns:
-        # add WER column
-        dfTrimmed.loc[2:, f"{column}_ER"] = dfTrimmed.loc[2:, column].astype(float).apply(
-            lambda x: ( WER_a + WER_b * ( ( na.exp( WER_k * x / 100 ) - 1 ) / WER_k ) ) * 100  # as x is percentile yield
-        )
+    try:
+        for column in target_columns:
+            # add WER column
+            dfTrimmed.loc[2:, f"{column}_ER"] = dfTrimmed.loc[2:, column].astype(float).apply(
+                lambda x: ( WER_a + WER_b * ( ( na.exp( WER_k * x / 100 ) - 1 ) / WER_k ) ) * 100  # as x is percentile yield
+            )
 
-        # add Error upper column
-        dfTrimmed.loc[2:, f"{column}_EU"] = (
-            dfTrimmed.loc[2:, column].astype(float) * ( 1 + dfTrimmed.loc[2:, f"{column}_ER"].astype(float) / 100 )
-        )
-        
-        # add Error lower column
-        dfTrimmed.loc[2:, f"{column}_EL"] = (
-            dfTrimmed.loc[2:, column].astype(float) * ( 1 - dfTrimmed.loc[2:, f"{column}_ER"].astype(float) / 100 )
-        )
+            # add Error upper column
+            dfTrimmed.loc[2:, f"{column}_EU"] = (
+                dfTrimmed.loc[2:, column].astype(float) * ( 1 + dfTrimmed.loc[2:, f"{column}_ER"].astype(float) / 100 )
+            )
+            
+            # add Error lower column
+            dfTrimmed.loc[2:, f"{column}_EL"] = (
+                dfTrimmed.loc[2:, column].astype(float) * ( 1 - dfTrimmed.loc[2:, f"{column}_ER"].astype(float) / 100 )
+            )
 
-    # #   Ys, Yeを含む列の取得
+    except ValueError as e:
+        print(f"Error while processing columns: {e}")
+        return None
 
-    # simulation_columns = dfTrimmed.columns[dfTrimmed.iloc[0] == "Sim"]
-    # experiment_columns = dfTrimmed.columns[dfTrimmed.iloc[0] == "Exp"]
-
-    # #   Exp, Sim各列についてループ
-
-    # for column_Ye, column_Ys in zip(experiment_columns, simulation_columns):
-
-    #     #   3行目にラベルをつける
-    #     dfTrimmed.at[1, column_Ys] = "Ys, %"
-    #     dfTrimmed.at[1, column_Ye] = "Ye, %"
-    #     dfTrimmed.at[1, f"{column_Ys}_ER"] = "Erel, %"
-    #     dfTrimmed.at[1, f"{column_Ye}_Eabs"] = "Eabs, %"
-    #     dfTrimmed.at[1, f"{column_Ye}_WFIn"] = "WFI(n)"
-
-    #     #   各行の値についてループ
-    #     for i in range(2, len(dfTrimmed)):
-
-    #         #   値がNaNでない場合、Exp列の値をSim列の値と比較して、WFIを計算する
-
-    #         if not na.isnan(dfTrimmed.at[i, column_Ye]):
-    #             #   Eabs, WFI(n)の計算
-
-    #             dfTrimmed.at[i, f"{column_Ye}_Eabs"] = abs(
-    #                 dfTrimmed.at[i, column_Ye] - dfTrimmed.at[i, column_Ys]
-    #             ) / dfTrimmed.at[i, column_Ys] * 100
-
-    #             dfTrimmed.at[i, f"{column_Ye}_WFIn"] = (
-    #                 dfTrimmed.at[i, f"{column_Ye}_Eabs"] / dfTrimmed.at[i, f"{column_Ys}_ER"] 
-    #             ) 
     
     return dfTrimmed
 
@@ -166,28 +140,33 @@ def draw_WERcharts(
     color_index = exp_startcolour % len(chart_colors)  # ensure color index is within bounds
     custom_lines = []  # for legend
 
-    for column in experiment_columns:
-        dfDraw[f"{column}"] = dfDraw[f"{column}"].astype(float)  # convert experiment column to float
-        
-        dfDraw.plot( ax=ax,
-                    x=f"{time_column[0]}",
-                    y=f"{column}",
-                    grid=True,
-                    color=chart_colors[color_index],
-                    marker="o",
-                    markersize=var_marker_size,
-                    linestyle='None',
-                    alpha=1.0
-        )
+    try:
+        for column in experiment_columns:
+            dfDraw[f"{column}"] = dfDraw[f"{column}"].astype(float)  # convert experiment column to float
+            
+            dfDraw.plot( ax=ax,
+                        x=f"{time_column[0]}",
+                        y=f"{column}",
+                        grid=True,
+                        color=chart_colors[color_index],
+                        marker="o",
+                        markersize=var_marker_size,
+                        linestyle='None',
+                        alpha=1.0
+            )
 
-        #   凡例の設定：まったく新しいLine2Dオブジェクトのセットを作ることで好きなように凡例内を変える
-        
-        custom_lines=custom_lines + [
-            Line2D([0], [0], color=chart_colors[color_index], marker='o', markersize=var_marker_size, linestyle='-', label=r"$"+column+r"$")
-        ]
+            #   凡例の設定：まったく新しいLine2Dオブジェクトのセットを作ることで好きなように凡例内を変える
+            
+            custom_lines=custom_lines + [
+                Line2D([0], [0], color=chart_colors[color_index], marker='o', markersize=var_marker_size, linestyle='-', label=r"$"+column+r"$")
+            ]
 
-        color_index += 1
-        color_index %= len(chart_colors)
+            color_index += 1
+            color_index %= len(chart_colors)
+
+    except ValueError as e:
+        print(f"Error while processing columns: {e}")
+        return None
 
     #   凡例の表示
 

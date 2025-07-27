@@ -24,6 +24,25 @@ with st.expander("Terms and Conditions"):
     See also the [Github repository](https://github.com/saoxxxv/WFIdataprocess).
                 """)
 
+st.markdown("""
+```math
+WFI=\\frac{1}{n}\sum_{i=1}^{n}\\frac{E_{abs,i}}{E_{rel,i}\left(Y_{s,i}\\right)}
+```
+
+""")
+
+st.warning("""
+**Caution:**  
+Chemists should be aware of choosing the appropriate data points of WFI(n) to 
+calculate the WFI value based on deep chemical insights,
+**especially when the reaction system develops in non-exponential manner.**
+The data points after reaching plateau should be sparsely selected to avoid overfitting, whilst
+the data points in the high-drift region should be densely selected to avoid underfitting.
+Evenly spaced data points are recommended for linear region such as zeroth-order or semi-batch 
+(dropwise) control.
+**For more details, please refer to the original paper.**
+""")
+
 uploaded_file = st.sidebar.file_uploader("Upload an Excel file", type=["xlsx"])
 if uploaded_file is not None:
     st.sidebar.header("WFI Parameters")
@@ -44,7 +63,7 @@ if uploaded_file is not None:
             
             # Error handling.
             if df_trimmed is None or df_trimmed.empty:
-                st.error(f"The processed data for sheet '{sheet_name}' is empty or invalid. Please check the input file.")
+                st.error(f"The processed data for sheet '{sheet_name}' is empty or invalid. Please check the input file. (Maybe wrong experimental data?)")
                 continue
             
             df_calcd = calc_WFI(df_trimmed, WER_a, WER_b, WER_k)
