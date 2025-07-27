@@ -9,7 +9,17 @@ rather than utilizing curly arrows, lines, and dots. By encapsulating mathematic
 with deep chemical knowledge to focus on chemistry putting aside calculation details.
 
 ## Output samples
-![Screenshot](./assets/sample_chart.png)
+
+<a href="./assets/sample_chart.png" target="_blank">
+    <img src="./assets/sample_chart.png" alt="Sample chart output" width="300"/>
+</a>  
+<a href="./assets/sample_output.png" target="_blank">
+    <img src="./assets/sample_output.png" alt="Sample screenshot of Excel output" width="500"/>
+</a>
+
+<!-- ![Screenshot](./assets/sample_chart.png)
+![Screenshot](./assets/sample_output.png)
+-->
 
 ## Installation
 If you have python environment in your local, try

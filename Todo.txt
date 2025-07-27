@@ -1,2 +1,2 @@
-WER calculatorの関数化と実装
-Live Chartの実装, plotlyでa, b, kをスライドバーに
+Live Chartの実装, plotlyでa, b, kをスライドバーにしたい。
+
