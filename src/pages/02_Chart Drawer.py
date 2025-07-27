@@ -17,6 +17,8 @@ with st.expander("Terms and Conditions"):
     Cite this:  
     Orito, Y. &ensp;_ACS Omega_ **2025**, _10_ (9), 9266–9274. https://doi.org/10.1021/acsomega.4c09609.  
     * **For commercial use:** please contact the author.
+                    
+    See also the [Github repository](https://github.com/saoxxxv/WFIdataprocess).
                 """)
 
 uploaded_file = st.sidebar.file_uploader("Upload an Excel file", type=["xlsx"])
