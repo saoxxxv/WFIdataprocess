@@ -1,7 +1,10 @@
 cff-version: 1.2.0
-message: "Cite this as follows:"
+message: >
+  For quick use, try web app at: https://wfidataprocess.streamlit.app/
+  For details, see: https://github.com/saoxxxv/WFIdataprocess
+  Cite this as shown in the app or README.
 title: "WFI Data Processor"
-version: 1.0.1
+version: 1.0.2
 doi: 10.5281/zenodo.16490790
 date-released: 2025-07-25
 authors:
