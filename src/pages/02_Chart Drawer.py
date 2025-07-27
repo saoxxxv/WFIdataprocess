@@ -43,7 +43,7 @@ if uploaded_file is not None:
         
         # Error handling.
         if df_trimmed is None or df_trimmed.empty:
-            st.error("The processed data is empty or invalid. Please check the input file. (Maybe wrong simulation data?)")
+            st.error("The processed data is empty or invalid. Please check the input file. (Maybe wrong simulation data, or missing sheet?)")
             st.stop()
     
         fig_ax = draw_WERcharts(

@@ -231,20 +231,24 @@ def calc_WFI(dfTrimmed, WER_a, WER_b, WER_k):
         dfTrimmed.at[1, f"{column_Ye}_WFIn"] = "WFI(n)"
 
         #   各行の値についてループ
-        for i in range(2, len(dfTrimmed)):
+        try:
+            for i in range(2, len(dfTrimmed)):
 
-            #   値がNaNでない場合、Exp列の値をSim列の値と比較して、WFIを計算する
+                #   値がNaNでない場合、Exp列の値をSim列の値と比較して、WFIを計算する
 
-            if not na.isnan(dfTrimmed.at[i, column_Ye]):
-                #   Eabs, WFI(n)の計算
+                if not na.isnan(dfTrimmed.at[i, column_Ye]):
+                    #   Eabs, WFI(n)の計算
 
-                dfTrimmed.at[i, f"{column_Ye}_Eabs"] = abs(
-                    dfTrimmed.at[i, column_Ye] - dfTrimmed.at[i, column_Ys]
-                ) / dfTrimmed.at[i, column_Ys] * 100
+                    dfTrimmed.at[i, f"{column_Ye}_Eabs"] = abs(
+                        dfTrimmed.at[i, column_Ye] - dfTrimmed.at[i, column_Ys]
+                    ) / dfTrimmed.at[i, column_Ys] * 100
 
-                dfTrimmed.at[i, f"{column_Ye}_WFIn"] = (
-                    dfTrimmed.at[i, f"{column_Ye}_Eabs"] / dfTrimmed.at[i, f"{column_Ys}_ER"] 
-                ) 
+                    dfTrimmed.at[i, f"{column_Ye}_WFIn"] = (
+                        dfTrimmed.at[i, f"{column_Ye}_Eabs"] / dfTrimmed.at[i, f"{column_Ys}_ER"] 
+                    ) 
+        except TypeError as e:
+            print(f"Error while processing columns: {e}")
+            return None
 
     return dfTrimmed
 

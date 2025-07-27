@@ -51,11 +51,13 @@ if uploaded_file is not None:
     WER_k = st.sidebar.number_input("WER_k", value=-10.0)
 
     if st.button("Process"):
-        # Read all sheets from the uploaded Excel file
-        xls = pd.ExcelFile(uploaded_file)
-        sheet_names = xls.sheet_names
-        # st.sidebar.header("Select Sheet")
-        # sheet_name = st.sidebar.selectbox("Sheet Name", options=sheet_names, index=0)
+        try:
+            # Read all sheets from the uploaded Excel file
+            xls = pd.ExcelFile(uploaded_file)
+            sheet_names = xls.sheet_names
+        except Exception as e:
+            st.error(f"Failed to open the uploaded Excel file. The file may be corrupted or not a valid Excel file. Details: {e}")
+            st.stop()
 
         processed_sheets = {}
         for sheet_name in sheet_names:
@@ -63,10 +65,14 @@ if uploaded_file is not None:
             
             # Error handling.
             if df_trimmed is None or df_trimmed.empty:
-                st.error(f"The processed data for sheet '{sheet_name}' is empty or invalid. Please check the input file. (Maybe wrong experimental data?)")
+                st.error(f"The processed data for sheet '{sheet_name}' is empty or invalid. Please check the input file. (Maybe wrong simulation data?)")
                 continue
             
             df_calcd = calc_WFI(df_trimmed, WER_a, WER_b, WER_k)
+
+            if df_calcd is None or df_calcd.empty:
+                st.error(f"Calculation of WFI for sheet '{sheet_name}' failed. Please check the input file. (Maybe wrong experimental data?)")
+                continue
 
             processed_sheets[sheet_name] = df_calcd
         
