@@ -26,7 +26,7 @@ cd WFIdataprocess
 pip install -r requirements.txt
 streamlit run src/Top.py
 ```
-Or, simply access web app ran on [Streamlit cloud](https://wfidataprocess.streamlit.app/)  
+Or, simply access web app ran on [Streamlit cloud](https://wfidataprocess.streamlit.app/).  
 It may take several minutes to launch when sleep mode.
 
 ## Usage
