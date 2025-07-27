@@ -14,12 +14,9 @@ with deep chemical knowledge to focus on chemistry putting aside calculation det
     <img src="./assets/sample_chart.png" alt="Sample chart output" width="300"/>
 </a>  
 <a href="./assets/sample_output.png" target="_blank">
-    <img src="./assets/sample_output.png" alt="Sample screenshot of Excel output" width="500"/>
+    <img src="./assets/sample_output.png" alt="Sample screenshot of Excel output" width="700"/>
 </a>
 
-<!-- ![Screenshot](./assets/sample_chart.png)
-![Screenshot](./assets/sample_output.png)
--->
 
 ## Installation
 If you have python environment in your local, try
@@ -46,7 +43,8 @@ For commercial licensing, see [COMMERCIAL_LICENSE.md](./COMMERCIAL_LICENSE.md).
 
 ## Citation
 Cite this work as:  
-Orito, Y.  _ACS Omega_ **2025**, _10_, 9266–9274. https://doi.org/10.1021/acsomega.4c09609.
+Orito, Y.  _ACS Omega_ **2025**, _10_, 9266–9274. https://doi.org/10.1021/acsomega.4c09609.  
+[![DOI](https://zenodo.org/badge/1022603166.svg)](https://zenodo.org/badge/latestdoi/1022603166)
 
 ## Contact
 For bug reports, feature requests, or commercial inquiries, please contact:  

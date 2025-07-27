@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Cite this:"
+title: "WFI Data Processor"
+version: 1.0.0
+doi: 10.5281/zenodo.1234567
+date-released: 2025-07-25
+authors:
+  - family-names: Orito
+    given-names: Yuya
+    orcid: "https://orcid.org/0000-0002-1505-1025"
+license: AGPL-3.0-only
+repository-code: "https://github.com/saoxxxv/WFIdataprocess"
+url: "https://wfidataprocess.streamlit.app/"
+abstract: >
+  A simple data processor for chemical reaction timecourses which provides weighted error range,
+  fitting indices calculations, and interactive chart drawing to support mechanistic kinetic analysis
+  in organic chemistry.
