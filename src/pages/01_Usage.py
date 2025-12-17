@@ -9,10 +9,11 @@ The Excel file shuld have the following structure:
 - The first row should contain the column headers.
     - The text is used as the series name in the legend.
     - TeX formatting is supported, e.g., `\\Delta` for delta.
-- The columns with "Time", "Sim" or "Exp" in the second row are processed.
+- The columns with "Time", "Sim", "Exp", or "Temp" in the second row are processed.
     - "Time" for time series, in min. Currently only one time series is supported.
     - "Sim" for simulation data. WERs are calculated from this data. Plotted as a line with shaded error range.
     - "Exp" for experimental data. Plotted without line.
+    - "Temp" for experimental temperature data. Plotted on secondary Y-axis.
     - The colours are assigned based on the order of the columns (left to right). 
     Make sure the columns are sorted in same order for both "Sim" and "Exp". 
 - The third row is reserved for output data, which will be used in WFI calculator.

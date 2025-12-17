@@ -182,45 +182,58 @@ def draw_WERcharts(
     #   温度データがある場合描画
 
     if flagHasTempColumn:
-        temp_column = dfTrimmed.columns[dfTrimmed.iloc[0].astype(str).str.match(r"^[Tt]emp\s*")]
-        dfDraw[f"{temp_column[0]}"] = dfDraw[f"{temp_column[0]}"].astype(float)
         
-        #   NaN補間
-
-        dfDraw_temp = dfDraw.copy()
-        dfDraw_temp = dfDraw_temp.dropna(subset=[f"{temp_column[0]}"])
-
-        tempcolor = 'navy'  #default
-        if flagMarkerChange: #assume monochrome
-            tempcolor = 'grey'
-
         ax2 = ax.twinx()
-        dfDraw_temp.plot(
-                    ax=ax2,
-                    x=f"{time_column[0]}",
-                    y=f"{temp_column[0]}",
-                    grid=True,
-                    color=tempcolor,
-                    marker='none',
-                    style="--",
-                    linewidth=1.0,
-                    alpha=1.0
-        )
+        ymin = 0  #default
+        temp_columns = dfTrimmed.columns[dfTrimmed.iloc[0].astype(str).str.match(r"^[Tt]emp\s*")]
 
-        ax2.spines['top'].set_color('white')
+        if temp_columns.size > 0:
 
-        ax2.tick_params(axis='y',which='both', colors='gainsboro', labelsize=var_font_size-1)
-        ax2.grid(color='gainsboro', linestyle='-', linewidth=0.5)
-        ax2.grid(False)
-        for l in ax2.get_yticklabels():
-            l.set_color('dimgrey')
-        ax2.set_ylabel(r"Temp, °C", loc="top", color='dimgrey', fontsize=var_font_size, labelpad=2)
+            for column in temp_columns:
+                dfDraw[f"{column}"] = dfDraw[f"{column}"].astype(float)
 
-        ymin = dfDraw_temp[f"{temp_column[0]}"].min()
-        ax2.set_ylim(ymin-temp_Yshift, ymin-temp_Yshift+temp_Yspan)
+                #   NaN補間
 
-        ax2.get_legend().set_visible(False)
+                dfDraw_temp = dfDraw.copy()
+                dfDraw_temp = dfDraw_temp.dropna(subset=[f"{column}"])
 
+                tempcolor = 'navy'  #default
+                if flagMarkerChange: #assume monochrome
+                    tempcolor = 'grey'
+
+
+                dfDraw_temp.plot(
+                            ax=ax2,
+                            x=f"{time_column[0]}",
+                            y=f"{column}",
+                            grid=True,
+                            color=tempcolor,
+                            marker='none',
+                            style="--",
+                            linewidth=1.0,
+                            alpha=1.0
+                )
+
+                ymin = dfDraw[f"{column}"].min()
+            
+            ax2.spines['top'].set_color('white')
+
+            ax2.tick_params(axis='y',which='both', colors='gainsboro', labelsize=var_font_size-1)
+            ax2.grid(color='gainsboro', linestyle='-', linewidth=0.5)
+            ax2.grid(False)
+            for l in ax2.get_yticklabels():
+                l.set_color('dimgrey')
+            ax2.set_ylabel(r"Temp, °C", loc="top", color='dimgrey', fontsize=var_font_size, labelpad=2)
+
+
+            ax2.set_ylim(ymin-temp_Yshift, ymin-temp_Yshift+temp_Yspan)
+
+            ax2.get_legend().set_visible(False)
+        
+        else:
+            print("Temperature column not found.")
+            return None
+        
     #   凡例の表示
 
     legend=ax.legend(handles=custom_lines, loc='best', ncol=1, fontsize=var_font_size-1)
