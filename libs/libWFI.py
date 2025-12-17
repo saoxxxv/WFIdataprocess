@@ -67,7 +67,8 @@ def draw_WERcharts(
     flagShowLegend, 
     sim_startcolour, 
     exp_startcolour,
-    flagMarkerChange
+    flagMarkerChange,
+    flagHasTempColumn
 ):
     
     # Error handling.
@@ -175,6 +176,41 @@ def draw_WERcharts(
     except ValueError as e:
         print(f"Error while processing columns: {e}")
         return None
+
+    #   温度データがある場合描画
+
+    if flagHasTempColumn:
+        temp_column = dfTrimmed.columns[dfTrimmed.iloc[0].astype(str).str.match(r"^[Tt]emp\s*")]
+        dfDraw[f"{temp_column[0]}"] = dfDraw[f"{temp_column[0]}"].astype(float)
+        
+        #   線形補間
+
+        dfDraw_temp = dfDraw.copy()
+        # dfDraw_temp[f"{temp_column[0]}"] = dfDraw_temp[f"{temp_column[0]}"].interpolate()
+        dfDraw_temp = dfDraw_temp.dropna(subset=[f"{temp_column[0]}"])
+
+        ax2 = ax.twinx()
+        dfDraw_temp.plot(
+                    ax=ax2,
+                    x=f"{time_column[0]}",
+                    y=f"{temp_column[0]}",
+                    grid=True,
+                    color='navy',
+                    marker='none',
+                    style="--",
+                    alpha=1.0
+        )
+
+        ax2.spines['top'].set_color('white')
+
+        ax2.tick_params(axis='y',which='both', colors='gainsboro', labelsize=var_font_size-1)
+        ax2.grid(color='gainsboro', linestyle='-', linewidth=0.5)
+        ax2.grid(False)
+        for l in ax2.get_yticklabels():
+            l.set_color('dimgrey')
+        ax2.set_ylabel(r"Temp, °C", loc="top", color='dimgrey', fontsize=var_font_size, labelpad=2)
+
+        ax2.get_legend().set_visible(False)
 
     #   凡例の表示
 

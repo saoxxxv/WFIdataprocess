@@ -40,6 +40,7 @@ if uploaded_file is not None:
     sim_startcolour = st.sidebar.selectbox("Simulation Start Color Preset", options=list(colour_preset_indices.keys()), index=0, format_func=lambda x: colour_preset_indices[x])
     exp_startcolour = st.sidebar.selectbox("Experiment Start Color Preset", options=list(colour_preset_indices.keys()), index=0, format_func=lambda x: colour_preset_indices[x])
     flagMarkerChange = st.sidebar.checkbox("Change Marker Shapes", value=False)
+    flagHasTempColumn = st.sidebar.checkbox("Add Temperature as Y2", value=False)
 
     if st.button("Process"):
     
@@ -58,7 +59,8 @@ if uploaded_file is not None:
             flagShowLegend, 
             sim_startcolour, 
             exp_startcolour,
-            flagMarkerChange
+            flagMarkerChange,
+            flagHasTempColumn
         )
 
         if fig_ax is None:
