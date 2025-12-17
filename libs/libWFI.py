@@ -66,7 +66,8 @@ def draw_WERcharts(
     var_chart_size_inches_width, 
     flagShowLegend, 
     sim_startcolour, 
-    exp_startcolour
+    exp_startcolour,
+    flagMarkerChange
 ):
     
     # Error handling.
@@ -82,7 +83,10 @@ def draw_WERcharts(
 
     chart_colors = ['limegreen', 'orange', 'darkslateblue', 'magenta', 
                     'forestgreen', 'indianred', 'royalblue', 'purple',
-                    'lawngreen', 'crimson', 'dodgerblue', 'deeppink']
+                    'lawngreen', 'crimson', 'dodgerblue', 'deeppink',
+                    'black', 'dimgray', 'darkgray', 'lightgray']
+
+    chart_markers = ['o', '^', 's', 'D']
 
     #   プロットのオブジェクトを取得して基本設定
     #   白銀比でプロットを作成
@@ -139,6 +143,7 @@ def draw_WERcharts(
 
     color_index = exp_startcolour % len(chart_colors)  # ensure color index is within bounds
     custom_lines = []  # for legend
+    marker_index = 0
 
     try:
         for column in experiment_columns:
@@ -149,7 +154,7 @@ def draw_WERcharts(
                         y=f"{column}",
                         grid=True,
                         color=chart_colors[color_index],
-                        marker="o",
+                        marker=chart_markers[marker_index],
                         markersize=var_marker_size,
                         linestyle='None',
                         alpha=1.0
@@ -158,11 +163,14 @@ def draw_WERcharts(
             #   凡例の設定：まったく新しいLine2Dオブジェクトのセットを作ることで好きなように凡例内を変える
             
             custom_lines=custom_lines + [
-                Line2D([0], [0], color=chart_colors[color_index], marker='o', markersize=var_marker_size, linestyle='-', label=r"$"+column+r"$")
+                Line2D([0], [0], color=chart_colors[color_index], marker=chart_markers[marker_index], markersize=var_marker_size, linestyle='-', label=r"$"+column+r"$")
             ]
 
             color_index += 1
             color_index %= len(chart_colors)
+            if flagMarkerChange:
+                marker_index += 1
+                marker_index %= len(chart_markers)
 
     except ValueError as e:
         print(f"Error while processing columns: {e}")

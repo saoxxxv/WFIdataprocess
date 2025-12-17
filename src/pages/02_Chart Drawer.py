@@ -36,9 +36,10 @@ if uploaded_file is not None:
     var_font_size = st.sidebar.number_input("Font Size", value=10)
     var_chart_size_inches_width = st.sidebar.number_input("Chart Width (inches)", value=3)
     flagShowLegend = st.sidebar.checkbox("Show Legend", value=True)
-    colour_preset_indices = {0: "A", 4: "B", 8: "C"}
+    colour_preset_indices = {0: "A", 4: "B", 8: "C", 12: "Mono"}
     sim_startcolour = st.sidebar.selectbox("Simulation Start Color Preset", options=list(colour_preset_indices.keys()), index=0, format_func=lambda x: colour_preset_indices[x])
     exp_startcolour = st.sidebar.selectbox("Experiment Start Color Preset", options=list(colour_preset_indices.keys()), index=0, format_func=lambda x: colour_preset_indices[x])
+    flagMarkerChange = st.sidebar.checkbox("Change Marker Shapes", value=False)
 
     if st.button("Process"):
     
@@ -56,7 +57,8 @@ if uploaded_file is not None:
             var_chart_size_inches_width, 
             flagShowLegend, 
             sim_startcolour, 
-            exp_startcolour
+            exp_startcolour,
+            flagMarkerChange
         )
 
         if fig_ax is None:
