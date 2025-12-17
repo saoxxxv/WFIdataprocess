@@ -68,7 +68,9 @@ def draw_WERcharts(
     sim_startcolour, 
     exp_startcolour,
     flagMarkerChange,
-    flagHasTempColumn
+    flagHasTempColumn,
+    temp_Yshift,
+    temp_Yspan
 ):
     
     # Error handling.
@@ -183,11 +185,14 @@ def draw_WERcharts(
         temp_column = dfTrimmed.columns[dfTrimmed.iloc[0].astype(str).str.match(r"^[Tt]emp\s*")]
         dfDraw[f"{temp_column[0]}"] = dfDraw[f"{temp_column[0]}"].astype(float)
         
-        #   線形補間
+        #   NaN補間
 
         dfDraw_temp = dfDraw.copy()
-        # dfDraw_temp[f"{temp_column[0]}"] = dfDraw_temp[f"{temp_column[0]}"].interpolate()
         dfDraw_temp = dfDraw_temp.dropna(subset=[f"{temp_column[0]}"])
+
+        tempcolor = 'navy'  #default
+        if flagMarkerChange: #assume monochrome
+            tempcolor = 'grey'
 
         ax2 = ax.twinx()
         dfDraw_temp.plot(
@@ -195,9 +200,10 @@ def draw_WERcharts(
                     x=f"{time_column[0]}",
                     y=f"{temp_column[0]}",
                     grid=True,
-                    color='navy',
+                    color=tempcolor,
                     marker='none',
                     style="--",
+                    linewidth=1.0,
                     alpha=1.0
         )
 
@@ -209,6 +215,9 @@ def draw_WERcharts(
         for l in ax2.get_yticklabels():
             l.set_color('dimgrey')
         ax2.set_ylabel(r"Temp, °C", loc="top", color='dimgrey', fontsize=var_font_size, labelpad=2)
+
+        ymin = dfDraw_temp[f"{temp_column[0]}"].min()
+        ax2.set_ylim(ymin-temp_Yshift, ymin-temp_Yshift+temp_Yspan)
 
         ax2.get_legend().set_visible(False)
 
