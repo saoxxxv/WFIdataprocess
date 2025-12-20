@@ -91,6 +91,8 @@ def draw_WERcharts(
 
     chart_markers = ['o', '^', 's', 'D']
 
+    temp_colors = ['darkviolet', 'navy', 'darkred', 'gray']
+
     #   プロットのオブジェクトを取得して基本設定
     #   白銀比でプロットを作成
 
@@ -197,17 +199,17 @@ def draw_WERcharts(
                 dfDraw_temp = dfDraw.copy()
                 dfDraw_temp = dfDraw_temp.dropna(subset=[f"{column}"])
 
-                tempcolor = 'navy'  #default
-                if flagMarkerChange: #assume monochrome
-                    tempcolor = 'grey'
-
+                # tempcolor = 'navy'  #default
+                # if flagMarkerChange: #assume monochrome
+                #     tempcolor = 'grey'
+                color_index = int(exp_startcolour / len(temp_colors)) % len(temp_colors)
 
                 dfDraw_temp.plot(
                             ax=ax2,
                             x=f"{time_column[0]}",
                             y=f"{column}",
                             grid=True,
-                            color=tempcolor,
+                            color=temp_colors[color_index],
                             marker='none',
                             style="--",
                             linewidth=1.0,

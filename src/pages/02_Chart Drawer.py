@@ -43,7 +43,7 @@ if uploaded_file is not None:
     flagHasTempColumn = st.sidebar.checkbox("Add Temperature as Y2", value=False)
     if flagHasTempColumn:
         temp_Yshift = st.sidebar.number_input("Temp Y Shift", value=5)
-        temp_Yspan = st.sidebar.number_input("Temp Y Span", value=40)
+        temp_Yspan = st.sidebar.number_input("Temp Y Span", value=30)
     else:   # no temperature column
         temp_Yshift = 0
         temp_Yspan = 0
